@@ -1,0 +1,26 @@
+.App {
+  
+  text-align: center;
+  
+}
+
+.start {
+  margin-top: 10px;
+  padding: 5px;
+  background-color: rgb(32, 112, 59);
+  border: none;
+  border-radius: 4%;
+  cursor: pointer;
+  align-items: center;
+}
+
+.start:hover {
+  background-color: rgb(52, 129, 78);
+  
+}
+
+.start img {
+  width: 170px;
+  height: auto;
+  
+}

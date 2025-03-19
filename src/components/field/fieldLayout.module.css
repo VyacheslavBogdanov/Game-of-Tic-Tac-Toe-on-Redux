@@ -1,0 +1,26 @@
+.fieldLayout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px; 
+    max-width: 510px; 
+    margin: 0 auto; 
+}
+
+.cell {
+    width: 100%;
+    height: 170px;
+    font-size: 5em;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-color: #f0f0f0; 
+    border: 10px ridge #b7bfbc;
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: background-color 0.2s; 
+}
+
+.cell:hover {
+    background-color: #e0e0e0;
+}
+

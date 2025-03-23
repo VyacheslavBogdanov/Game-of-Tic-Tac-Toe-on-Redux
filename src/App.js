@@ -24,7 +24,7 @@ const checkWinner = (field, currentPlayer) => {
 export default function App() {
   const [currentPlayer, setCurrentPlayer] = useState("X");
   const [isGameEnded, setIsGameEnded] = useState(false);
-  const [isDraw, setIsDraw] = useState(false);
+
   const { field } = store.getState();
 
   const handleClick = (index) => {
@@ -39,7 +39,7 @@ export default function App() {
         setIsGameEnded(true);
         return;
       } else if (newField.every((el) => el !== "")) {
-        setIsDraw(true);
+        store.dispatch({ type: "SET_IS_DRAW", payload: true });
       }
       setCurrentPlayer((prevState) => (prevState === "X" ? "0" : "X"));
     }
@@ -48,15 +48,14 @@ export default function App() {
   const startOver = () => {
     setCurrentPlayer("X");
     setIsGameEnded(false);
-    setIsDraw(false);
 
+    store.dispatch({ type: "SET_IS_DRAW", payload: false });
     store.dispatch({ type: "SET_FIELD", payload: Array(9).fill("") });
   };
 
   return (
     <>
       <AppLayout
-        isDraw={isDraw}
         isGameEnded={isGameEnded}
         currentPlayer={currentPlayer}
         handleClick={handleClick}

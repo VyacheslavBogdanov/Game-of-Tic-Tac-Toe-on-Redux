@@ -2,7 +2,7 @@ const initialState = {
   currentPlayer: "X",
   isGameEnded: false,
   isDraw: false,
-  field: ["", "", "", "", "", "", "", "", ""],
+  field: Array(9).fill(""),
 };
 
 export const reducer = (state = initialState, action) => {
@@ -19,7 +19,10 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case "SET_IS_DRAW": {
-      return payload;
+      return {
+        ...state,
+        isDraw: payload,
+      };
     }
     case "SET_FIELD": {
       return {

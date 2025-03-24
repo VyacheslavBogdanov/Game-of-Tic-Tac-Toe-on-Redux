@@ -22,13 +22,16 @@ const checkWinner = (field, currentPlayer) => {
 };
 
 export default function App() {
-  const [currentPlayer, setCurrentPlayer] = useState("X");
+  const [currentPlayer, setCurrentPlayer] = useState(
+    store.getState().currentPlayer
+  );
   const [isGameEnded, setIsGameEnded] = useState(store.getState().isGameEnded);
   const { field } = store.getState();
 
   useEffect(() => {
     const unsubscribe = store.subscribe(() => {
       setIsGameEnded(store.getState().isGameEnded);
+      setCurrentPlayer(store.getState().currentPlayer);
     });
     return () => {
       unsubscribe();
@@ -49,12 +52,24 @@ export default function App() {
       } else if (newField.every((el) => el !== "")) {
         store.dispatch({ type: "SET_IS_DRAW", payload: true });
       }
-      setCurrentPlayer((prevState) => (prevState === "X" ? "0" : "X"));
+
+      currentPlayer === "X"
+        ? store.dispatch({
+            type: "SET_CURRENT_PLAYER",
+            payload: "O",
+          })
+        : store.dispatch({
+            type: "SET_CURRENT_PLAYER",
+            payload: "X",
+          });
     }
   };
 
   const startOver = () => {
-    setCurrentPlayer("X");
+    store.dispatch({
+      type: "SET_CURRENT_PLAYER",
+      payload: "X",
+    });
     store.dispatch({ type: "SET_GAME_ENDED", payload: false });
     store.dispatch({ type: "SET_IS_DRAW", payload: false });
     store.dispatch({ type: "SET_FIELD", payload: Array(9).fill("") });
@@ -63,7 +78,6 @@ export default function App() {
   return (
     <>
       <AppLayout
-        currentPlayer={currentPlayer}
         handleClick={handleClick}
         startOver={startOver}
         restartButton={restartButton}

@@ -3,15 +3,10 @@ import { Info } from "./components/information/info";
 import styles from "./AppLayout.module.css";
 import PropTypes from "prop-types";
 
-export const AppLayout = ({
-  currentPlayer,
-  handleClick,
-  startOver,
-  restartButton,
-}) => {
+export const AppLayout = ({ handleClick, startOver, restartButton }) => {
   return (
     <div className={styles.App}>
-      <Info currentPlayer={currentPlayer} />
+      <Info />
       <Field handleClick={handleClick} />
       <button className={styles.start} onClick={startOver}>
         <img src={restartButton} alt="RESTART" />

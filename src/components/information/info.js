@@ -2,13 +2,17 @@ import { InfoLayout } from "./infoLayout";
 import { useState, useEffect } from "react";
 import { store } from "../../store";
 
-export const Info = ({ currentPlayer }) => {
+export const Info = () => {
   const [isDraw, setIsDraw] = useState(store.getState().isDraw);
   const [isGameEnded, setIsGameEnded] = useState(store.getState().isGameEnded);
+  const [currentPlayer, setCurrentPlayer] = useState(
+    store.getState().currentPlayer
+  );
   useEffect(() => {
     const unsubscribe = store.subscribe(() => {
       setIsDraw(store.getState().isDraw);
       setIsGameEnded(store.getState().isGameEnded);
+      setCurrentPlayer(store.getState().currentPlayer);
     });
     return () => {
       unsubscribe();

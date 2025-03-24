@@ -4,7 +4,6 @@ import styles from "./AppLayout.module.css";
 import PropTypes from "prop-types";
 
 export const AppLayout = ({
-  isGameEnded,
   currentPlayer,
   handleClick,
   startOver,
@@ -12,7 +11,7 @@ export const AppLayout = ({
 }) => {
   return (
     <div className={styles.App}>
-      <Info isGameEnded={isGameEnded} currentPlayer={currentPlayer} />
+      <Info currentPlayer={currentPlayer} />
       <Field handleClick={handleClick} />
       <button className={styles.start} onClick={startOver}>
         <img src={restartButton} alt="RESTART" />
@@ -22,9 +21,6 @@ export const AppLayout = ({
 };
 
 AppLayout.propTypes = {
-  // field: PropTypes.array,
-  isDraw: PropTypes.bool,
-  isGameEnded: PropTypes.bool,
   currentPlayer: PropTypes.string,
   handleClick: PropTypes.func,
   startOver: PropTypes.func,

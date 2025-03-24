@@ -1,13 +1,14 @@
 import { InfoLayout } from "./infoLayout";
-import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { store } from "../../store";
 
-export const Info = ({ isGameEnded, currentPlayer }) => {
+export const Info = ({ currentPlayer }) => {
   const [isDraw, setIsDraw] = useState(store.getState().isDraw);
+  const [isGameEnded, setIsGameEnded] = useState(store.getState().isGameEnded);
   useEffect(() => {
     const unsubscribe = store.subscribe(() => {
       setIsDraw(store.getState().isDraw);
+      setIsGameEnded(store.getState().isGameEnded);
     });
     return () => {
       unsubscribe();
@@ -29,9 +30,4 @@ export const Info = ({ isGameEnded, currentPlayer }) => {
       <InfoLayout displayInfo={displayInfo} />
     </div>
   );
-};
-
-Info.propTypes = {
-  isGameEnded: PropTypes.bool,
-  currentPlayer: PropTypes.string,
 };

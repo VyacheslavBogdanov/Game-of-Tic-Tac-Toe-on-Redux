@@ -23,9 +23,17 @@ const checkWinner = (field, currentPlayer) => {
 
 export default function App() {
   const [currentPlayer, setCurrentPlayer] = useState("X");
-  const [isGameEnded, setIsGameEnded] = useState(false);
-
+  const [isGameEnded, setIsGameEnded] = useState(store.getState().isGameEnded);
   const { field } = store.getState();
+
+  useEffect(() => {
+    const unsubscribe = store.subscribe(() => {
+      setIsGameEnded(store.getState().isGameEnded);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const handleClick = (index) => {
     if (isGameEnded) {
@@ -36,7 +44,7 @@ export default function App() {
 
       store.dispatch({ type: "SET_FIELD", payload: newField });
       if (checkWinner(newField, currentPlayer)) {
-        setIsGameEnded(true);
+        store.dispatch({ type: "SET_GAME_ENDED", payload: true });
         return;
       } else if (newField.every((el) => el !== "")) {
         store.dispatch({ type: "SET_IS_DRAW", payload: true });
@@ -47,8 +55,7 @@ export default function App() {
 
   const startOver = () => {
     setCurrentPlayer("X");
-    setIsGameEnded(false);
-
+    store.dispatch({ type: "SET_GAME_ENDED", payload: false });
     store.dispatch({ type: "SET_IS_DRAW", payload: false });
     store.dispatch({ type: "SET_FIELD", payload: Array(9).fill("") });
   };
@@ -56,7 +63,6 @@ export default function App() {
   return (
     <>
       <AppLayout
-        isGameEnded={isGameEnded}
         currentPlayer={currentPlayer}
         handleClick={handleClick}
         startOver={startOver}

@@ -15,7 +15,7 @@ export const reducer = (state = initialState, action) => {
     case "SET_GAME_ENDED": {
       return {
         ...state,
-        age: payload,
+        isGameEnded: payload,
       };
     }
     case "SET_IS_DRAW": {

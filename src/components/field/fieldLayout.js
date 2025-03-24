@@ -29,5 +29,5 @@ export const FieldLayout = ({ handleClick }) => {
 };
 
 FieldLayout.propTypes = {
-  shandleClick: PropTypes.func,
+  handleClick: PropTypes.func,
 };

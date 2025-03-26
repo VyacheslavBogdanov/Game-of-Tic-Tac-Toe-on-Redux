@@ -16,7 +16,6 @@ export const AppLayout = ({ handleClick, startOver, restartButton }) => {
 };
 
 AppLayout.propTypes = {
-  currentPlayer: PropTypes.string,
   handleClick: PropTypes.func,
   startOver: PropTypes.func,
   restartButton: PropTypes.any,

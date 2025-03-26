@@ -1,9 +1,11 @@
 import { AppLayout } from "./AppLayout";
-// import { useState, useEffect } from "react";
-// import { store } from "./store";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-
+import {
+  selectCurrentPlayer,
+  selectField,
+  selectIsGameEnded,
+} from "./selectors";
 import restartButton from "./img/restart.png";
 
 const WIN_PATTERNS = [
@@ -24,26 +26,11 @@ const checkWinner = (field, currentPlayer) => {
 };
 
 export default function App() {
-  const currentPlayer = useSelector((state) => state.currentPlayer);
-  const isGameEnded = useSelector((state) => state.isGameEnded);
-  const field = useSelector((state) => state.field);
-  // const [currentPlayer, setCurrentPlayer] = useState(
-  //   store.getState().currentPlayer
-  // );
-  // const [isGameEnded, setIsGameEnded] = useState(store.getState().isGameEnded);
-  // const { field } = store.getState();
+  const currentPlayer = useSelector(selectCurrentPlayer);
+  const isGameEnded = useSelector(selectIsGameEnded);
+  const field = useSelector(selectField);
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   const unsubscribe = store.subscribe(() => {
-  //     setIsGameEnded(store.getState().isGameEnded);
-  //     setCurrentPlayer(store.getState().currentPlayer);
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
 
   const handleClick = (index) => {
     if (isGameEnded) {

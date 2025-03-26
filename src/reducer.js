@@ -1,9 +1,4 @@
-const initialState = {
-  currentPlayer: "X",
-  isGameEnded: false,
-  isDraw: false,
-  field: Array(9).fill(""),
-};
+import { initialState } from "./initial-state";
 
 export const reducer = (state = initialState, action) => {
   const { type, payload } = action;

@@ -1,18 +1,11 @@
 import styles from "./fieldLayout.module.css";
 import PropTypes from "prop-types";
-import { store } from "../../store";
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectField } from "../../selectors";
 
 export const FieldLayout = ({ handleClick }) => {
-  const [field, setField] = useState(store.getState().field);
-  useEffect(() => {
-    const unsubscribe = store.subscribe(() => {
-      setField(store.getState().field);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const field = useSelector(selectField);
+
   return (
     <div className={styles.fieldLayout}>
       {field.map((cell, index) => (

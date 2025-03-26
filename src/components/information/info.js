@@ -1,23 +1,15 @@
 import { InfoLayout } from "./infoLayout";
-import { useState, useEffect } from "react";
-import { store } from "../../store";
+import { useSelector } from "react-redux";
+import {
+  selectCurrentPlayer,
+  selectIsDraw,
+  selectIsGameEnded,
+} from "../../selectors";
 
 export const Info = () => {
-  const [isDraw, setIsDraw] = useState(store.getState().isDraw);
-  const [isGameEnded, setIsGameEnded] = useState(store.getState().isGameEnded);
-  const [currentPlayer, setCurrentPlayer] = useState(
-    store.getState().currentPlayer
-  );
-  useEffect(() => {
-    const unsubscribe = store.subscribe(() => {
-      setIsDraw(store.getState().isDraw);
-      setIsGameEnded(store.getState().isGameEnded);
-      setCurrentPlayer(store.getState().currentPlayer);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const currentPlayer = useSelector(selectCurrentPlayer);
+  const isDraw = useSelector(selectIsDraw);
+  const isGameEnded = useSelector(selectIsGameEnded);
 
   const displayInfo = () => {
     if (isDraw === true) {
